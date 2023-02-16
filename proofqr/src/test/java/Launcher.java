@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 
 public class Launcher {
@@ -19,6 +21,15 @@ public class Launcher {
         WebDriver driver = new ChromeDriver();
         driver.get("https://test-studio.oliu.id/login");
         Thread.sleep(3000);
+        //Delete QR screenshot
+        try {
+            Files.deleteIfExists(Paths.get("screenshots/qr.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Screenshot deleted...");
+
+        //Capture screenshot of QR
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.MuiBox-root.css-194mb91")));
         System.out.println("QR Code Found on web page");
@@ -32,4 +43,4 @@ public class Launcher {
         }
         driver.quit();
     }
-    }
+}
