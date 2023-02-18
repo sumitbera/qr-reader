@@ -16,9 +16,12 @@ dependencies {
     implementation group: 'io.appium', name: 'java-client', version: '8.3.0'
     implementation group: 'com.google.zxing', name: 'core', version: '3.5.1'
     implementation group: 'com.google.zxing', name: 'javase', version: '3.3.0'
+    compileJava {options.encoding = "UTF-8"}
+    compileTestJava {options.encoding = "UTF-8"}
 }
 
 test {
+    useTestNG()
     systemProperty "platform", System.getProperty("platform")
     testLogging.showStandardStreams = true
     testLogging.exceptionFormat = 'full'
